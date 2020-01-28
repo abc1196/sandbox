@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 import { ReactComponent as PeewahLogo } from '../../assets/peewah.svg';
 import TextField from '@material-ui/core/TextField';
 
-const LoginComponent = () => {
+const LoginComponent = (props) => {
   return (
     <Grid
     container
@@ -26,13 +26,13 @@ const LoginComponent = () => {
                 <form noValidate autoComplete="off">
                     <CardContent>
                         <Box display="flex" flexDirection="column">
-                            <TextField id="standard-basic" label="Correo" type="email"/>
-                            <TextField id="standard-password-input" label="Contraseña" type="password" autoComplete="current-password"/>
+                            <TextField id="standard-basic" label="Correo" type="email" value={props.email} onChange={(e) => props.setEmail(e.target.value)}/>
+                            <TextField id="standard-password-input" label="Contraseña" type="password" autoComplete="current-password" value={props.password} onChange={(e) => props.setPassword(e.target.value)}/>
                         </Box>
                     </CardContent>
                     <CardActions>
                         <Box display="flex" width="100%" flexDirection="column" alignItems="center">
-                            <Button variant="contained" color="primary" fullWidth disableElevation>
+                            <Button variant="contained" color="primary" fullWidth disableElevation onClick={(e) => props.login(e)}>
                                 Iniciar sesión
                             </Button>
                             <Box component="p" mt={8}>

@@ -4,9 +4,11 @@ import {
   Switch,
   Route
 } from 'react-router-dom';
+import './App.scss';
+import Home from '../Home/Home'
 import Login from '../Login/Login';
 import Register from '../Register/Register'
-import './App.scss';
+import UserContextProvider from '../../contexts/User/UserContext';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { createMuiTheme, responsiveFontSizes, ThemeProvider  } from '@material-ui/core/styles';
 
@@ -40,26 +42,32 @@ theme = responsiveFontSizes(theme);
 const App = () => {
   
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <Router>
-        {/*
-          A <Switch> looks through all its children <Route>
-          elements and renders the first one whose path
-          matches the current URL. Use a <Switch> any time
-          you have multiple routes, but you want only one
-          of them to render at a time
-        */}
-        <Switch>
-          <Route exact path='/'>
-            <Login />
-          </Route>
-          <Route path='/register'>
-            <Register />
-          </Route>
-        </Switch>
-      </Router>
-    </ThemeProvider>
+    <UserContextProvider>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Router>
+          {/*
+            A <Switch> looks through all its children <Route>
+            elements and renders the first one whose path
+            matches the current URL. Use a <Switch> any time
+            you have multiple routes, but you want only one
+            of them to render at a time
+          */}
+          <Switch>
+            <Route exact path='/'>
+              <Login />
+            </Route>
+            <Route exact path='/register'>
+              <Register />
+            </Route>
+            <Route exact path='/home'>
+              <Home />
+            </Route>
+          </Switch>
+        </Router>
+      </ThemeProvider>
+    </UserContextProvider>
+
   );
 }
 
